@@ -8,6 +8,7 @@ export default class QueryPost {
         this.quantityPost = quantityPost;
     }
 
+
     getData() {
         return gql`
       query {

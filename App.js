@@ -6,36 +6,53 @@
  * @flow
  */
 
+
 import React, {Component, PureComponent} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View, FlatList, NativeModules} from 'react-native';
 import NetworkManager from "./src/netwok/NetworkManager";
 import QueryPost from "./src/netwok/query/QueryPost";
+
 
 
 export default class App extends Component<Props> {
 
 
-  componentDidMount(): void {
-      this._requestPost();
-  }
+    constructor(props) {
+        super(props);
+        this.state = {
+            allPosts: []
+        };
 
-  render() {
-    return (
-        <View style={styles.container}>
+    }
 
-        </View>
-    );
-  }
+    componentDidMount(): void {
+        this._requestPost();
+        NativeModules.ToastNativeAndroid.show('toast', 1);
+    }
+
+    render() {
+        return (
+            <View style={styles.container}>
+                <FlatList
+                    keyExtractor={(item, index) => item.id}
+                    data={this.state.allPosts}
+                    renderItem={(item) =>
+                        <Text style={{padding: 10}}>
+                            {item.item.title}
+                        </Text>
+                    }
+                />
+            </View>
+        );
+    }
 
 
     _requestPost() {
         let manager: NetworkManager = new NetworkManager('https://api.graph.cool/simple/v1/ciyz901en4j590185wkmexyex');
         manager.executeQuery(new QueryPost(2),
-            (result) => {
-          alert(JSON.stringify(result))
-            }, (error) => {
-          alert(JSON.stringify(error))
-        });
+            (result) => this.setState({allPosts: result.data.allPosts}),
+            (error) =>  console.log(JSON.stringify(error))
+        );
     }
 
 }
