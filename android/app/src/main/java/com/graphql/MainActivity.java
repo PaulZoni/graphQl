@@ -1,8 +1,4 @@
 package com.graphql;
-
-import android.os.Bundle;
-import android.widget.Toast;
-
 import com.facebook.react.ReactActivity;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.WritableMap;

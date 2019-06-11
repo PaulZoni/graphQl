@@ -6,14 +6,16 @@
  * @flow
  */
 
-
-import React, {Component, PureComponent,} from 'react';
-import {StyleSheet, Text, View, FlatList, NativeModules, Platform, DeviceEventEmitter} from 'react-native';
+import React, {Component, PureComponent} from 'react';
+import {StyleSheet, Text, View, FlatList, NativeModules, Platform, DeviceEventEmitter,
+    requireNativeComponent} from 'react-native';
 import NetworkManager from "./src/netwok/NetworkManager";
 import QueryPost from "./src/netwok/query/QueryPost";
+var AndroidButton = requireNativeComponent('RCTButton');
 
 
 export default class App extends Component<Props> {
+
 
 
     constructor(props) {
@@ -26,12 +28,17 @@ export default class App extends Component<Props> {
 
     componentDidMount(): void {
         this._requestPost();
+        this._androidNativeEvent();
+    }
+
+    _androidNativeEvent() {
         if (Platform.OS === 'android') {
-             this.nativeEventListener = DeviceEventEmitter.addListener('onPause', function(e: Event) {
+            this.nativeEventListener = DeviceEventEmitter.addListener('onPause', function(e: Event) {
                 NativeModules.ToastNativeAndroid.show('toast', 1);
             });
             NativeModules.ManagerModule.addedData(2, (answer) => alert(answer));
         }
+
     }
 
     render() {
@@ -46,10 +53,15 @@ export default class App extends Component<Props> {
                         </Text>
                     }
                 />
+                {this._androidButton()}
             </View>
         );
     }
 
+    _androidButton() {
+        if (Platform.OS === 'android')
+            return <AndroidButton width={200} height={200} backgroundColor={'#65499c'}/>;
+    }
 
     _requestPost() {
         let manager: NetworkManager = new NetworkManager('https://api.graph.cool/simple/v1/ciyz901en4j590185wkmexyex');
