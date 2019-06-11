@@ -1,6 +1,12 @@
 package com.graphql;
 
+import android.os.Bundle;
+import android.widget.Toast;
+
 import com.facebook.react.ReactActivity;
+import com.facebook.react.bridge.Arguments;
+import com.facebook.react.bridge.WritableMap;
+import com.facebook.react.modules.core.DeviceEventManagerModule;
 
 public class MainActivity extends ReactActivity {
 
@@ -12,4 +18,18 @@ public class MainActivity extends ReactActivity {
     protected String getMainComponentName() {
         return "graphQl";
     }
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        WritableMap writableMap = Arguments.createMap();
+        writableMap.putString("event", "DidPause");
+        getReactInstanceManager()
+                .getCurrentReactContext()
+                .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+                .emit("onPause", writableMap);
+
+    }
+
 }

@@ -7,11 +7,10 @@
  */
 
 
-import React, {Component, PureComponent} from 'react';
-import {StyleSheet, Text, View, FlatList, NativeModules} from 'react-native';
+import React, {Component, PureComponent,} from 'react';
+import {StyleSheet, Text, View, FlatList, NativeModules, Platform, DeviceEventEmitter} from 'react-native';
 import NetworkManager from "./src/netwok/NetworkManager";
 import QueryPost from "./src/netwok/query/QueryPost";
-
 
 
 export default class App extends Component<Props> {
@@ -27,7 +26,12 @@ export default class App extends Component<Props> {
 
     componentDidMount(): void {
         this._requestPost();
-        NativeModules.ToastNativeAndroid.show('toast', 1);
+        if (Platform.OS === 'android') {
+             this.nativeEventListener = DeviceEventEmitter.addListener('onPause', function(e: Event) {
+                NativeModules.ToastNativeAndroid.show('toast', 1);
+            });
+            NativeModules.ManagerModule.addedData(2, (answer) => alert(answer));
+        }
     }
 
     render() {
