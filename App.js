@@ -8,27 +8,38 @@
 
 import React, {Component, PureComponent} from 'react';
 import {StyleSheet, Text, View, FlatList, NativeModules, Platform, DeviceEventEmitter,
-    requireNativeComponent} from 'react-native';
+    requireNativeComponent, NativeEventEmitter} from 'react-native';
 import NetworkManager from "./src/netwok/NetworkManager";
 import QueryPost from "./src/netwok/query/QueryPost";
+import MapView from "./src/view/MapView";
 var AndroidButton = requireNativeComponent('RCTButton');
 
 
+
+
 export default class App extends Component<Props> {
-
-
 
     constructor(props) {
         super(props);
         this.state = {
             allPosts: []
         };
-
+        this._iosNativeEvent();
     }
 
     componentDidMount(): void {
         this._requestPost();
         this._androidNativeEvent();
+        this._iosModule();
+    }
+
+    _iosNativeEvent() {
+        if (Platform.OS === 'ios') {
+            this.eventManager = new NativeEventEmitter(NativeModules.EventManager);
+            this.eventManager.addListener('sayHello', (event) => {
+                alert(JSON.stringify(event));
+            })
+        }
     }
 
     _androidNativeEvent() {
@@ -39,6 +50,13 @@ export default class App extends Component<Props> {
             NativeModules.ManagerModule.addedData(2, (answer) => alert(answer));
         }
 
+    }
+
+    _iosModule() {
+        if (Platform.OS === 'ios') {
+            NativeModules.CalendarManager.addEvent('user', '4');
+            NativeModules.CalendarManager.findEvent((error, events) => {})
+        }
     }
 
     render() {
@@ -53,6 +71,7 @@ export default class App extends Component<Props> {
                         </Text>
                     }
                 />
+                {this._mapIos()}
                 {this._androidButton()}
             </View>
         );
@@ -61,6 +80,24 @@ export default class App extends Component<Props> {
     _androidButton() {
         if (Platform.OS === 'android')
             return <AndroidButton width={200} height={200} backgroundColor={'#65499c'}/>;
+    }
+
+    _mapIos() {
+        if (Platform.OS === 'ios') {
+            let region = {
+                latitude: 37.48,
+                longitude: -122.16,
+                latitudeDelta: 0.1,
+                longitudeDelta: 0.1,
+            };
+            return (
+                <MapView
+                    style={{width: 200, height: 200}}
+                    zoomEnabled={false}
+                    region={region}
+                />
+                );
+        }
     }
 
     _requestPost() {
@@ -74,11 +111,12 @@ export default class App extends Component<Props> {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
+
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#F5FCFF',
+    },
 
 });

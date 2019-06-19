@@ -6,10 +6,13 @@
  */
 
 #import "AppDelegate.h"
-
+#import <React/RCTLog.h>
 #import <React/RCTBridge.h>
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
+#import "EventManager.h"
+#import "CalendarManager.h"
+
 
 @implementation AppDelegate
 
@@ -20,6 +23,9 @@
                                                    moduleName:@"graphQl"
                                             initialProperties:nil];
   
+  
+  
+  
   rootView.backgroundColor = [[UIColor alloc] initWithRed:1.0f green:1.0f blue:1.0f alpha:1];
 
   self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
@@ -27,6 +33,7 @@
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
+  
   return YES;
 }
 
@@ -38,5 +45,18 @@
   return [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
 #endif
 }
+
+- (void)applicationDidBecomeActive:(UIApplication *)application
+{
+
+}
+
+- (void)applicationWillEnterForeground:(UIApplication *)application
+{
+  EventManager *notification = [EventManager allocWithZone: nil];
+  [notification sendNotificationToReactNative];
+}
+
+
 
 @end

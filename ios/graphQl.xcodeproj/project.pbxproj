@@ -38,6 +38,12 @@
 		2DF0FFEE2056DD460020B375 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3EA31DF850E9000B6D8A /* libReact.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
+		E90353A122B7BA35003F4ED0 /* NGListener.m in Sources */ = {isa = PBXBuildFile; fileRef = E90353A022B7BA35003F4ED0 /* NGListener.m */; };
+		E90353D522B8D135003F4ED0 /* RNTMapManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E90353D422B8D135003F4ED0 /* RNTMapManager.m */; };
+		E911FFE922BA5B8300E09331 /* RCTConvert.m in Sources */ = {isa = PBXBuildFile; fileRef = E911FFE822BA5B8300E09331 /* RCTConvert.m */; };
+		E911FFEB22BA6A0B00E09331 /* RNTMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = E911FFEA22BA6A0B00E09331 /* RNTMapView.m */; };
+		E9A3CA6022AFD1D500D2580F /* CalendarManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E9A3CA5F22AFD1D500D2580F /* CalendarManager.m */; };
+		E9A3CAA722B235F600D2580F /* EventManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E9A3CAA622B235F600D2580F /* EventManager.m */; };
 		ED297163215061F000B7C4FE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED297162215061F000B7C4FE /* JavaScriptCore.framework */; };
 		ED2971652150620600B7C4FE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED2971642150620600B7C4FE /* JavaScriptCore.framework */; };
 /* End PBXBuildFile section */
@@ -345,6 +351,15 @@
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
+		E90353A022B7BA35003F4ED0 /* NGListener.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NGListener.m; sourceTree = "<group>"; };
+		E90353C722B7BB05003F4ED0 /* NGListener.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NGListener.h; sourceTree = "<group>"; };
+		E90353D422B8D135003F4ED0 /* RNTMapManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNTMapManager.m; sourceTree = "<group>"; };
+		E911FFE822BA5B8300E09331 /* RCTConvert.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTConvert.m; sourceTree = "<group>"; };
+		E911FFEA22BA6A0B00E09331 /* RNTMapView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNTMapView.m; sourceTree = "<group>"; };
+		E9A3CA5E22AFCFFE00D2580F /* CalendarManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CalendarManager.h; sourceTree = "<group>"; };
+		E9A3CA5F22AFD1D500D2580F /* CalendarManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CalendarManager.m; sourceTree = "<group>"; };
+		E9A3CA8022B2353900D2580F /* EventManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventManager.h; sourceTree = "<group>"; };
+		E9A3CAA622B235F600D2580F /* EventManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EventManager.m; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
@@ -487,6 +502,7 @@
 		13B07FAE1A68108700A75B9A /* graphQl */ = {
 			isa = PBXGroup;
 			children = (
+				E9A3CA5D22AFCF7900D2580F /* castom */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -609,6 +625,30 @@
 				2D16E6721FA4F8DC00B85C8A /* libRCTBlob-tvOS.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		E911FFC222BA5B3700E09331 /* map */ = {
+			isa = PBXGroup;
+			children = (
+				E90353D422B8D135003F4ED0 /* RNTMapManager.m */,
+				E911FFE822BA5B8300E09331 /* RCTConvert.m */,
+				E911FFEA22BA6A0B00E09331 /* RNTMapView.m */,
+			);
+			name = map;
+			sourceTree = "<group>";
+		};
+		E9A3CA5D22AFCF7900D2580F /* castom */ = {
+			isa = PBXGroup;
+			children = (
+				E911FFC222BA5B3700E09331 /* map */,
+				E9A3CA5E22AFCFFE00D2580F /* CalendarManager.h */,
+				E9A3CA5F22AFD1D500D2580F /* CalendarManager.m */,
+				E9A3CA8022B2353900D2580F /* EventManager.h */,
+				E9A3CAA622B235F600D2580F /* EventManager.m */,
+				E90353A022B7BA35003F4ED0 /* NGListener.m */,
+				E90353C722B7BB05003F4ED0 /* NGListener.h */,
+			);
+			name = castom;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1125,8 +1165,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E90353A122B7BA35003F4ED0 /* NGListener.m in Sources */,
+				E90353D522B8D135003F4ED0 /* RNTMapManager.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				E911FFEB22BA6A0B00E09331 /* RNTMapView.m in Sources */,
+				E911FFE922BA5B8300E09331 /* RCTConvert.m in Sources */,
+				E9A3CAA722B235F600D2580F /* EventManager.m in Sources */,
+				E9A3CA6022AFD1D500D2580F /* CalendarManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
