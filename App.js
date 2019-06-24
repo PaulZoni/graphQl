@@ -8,18 +8,22 @@
 
 import React, {Component, PureComponent} from 'react';
 import {StyleSheet, Text, View, FlatList, NativeModules,
-    Platform, DeviceEventEmitter, Animated, TouchableOpacity, Easing, ScrollView, Dimensions,
+    Platform, DeviceEventEmitter, Animated, TouchableOpacity, Easing, Dimensions,ImageBackground,
     requireNativeComponent, NativeEventEmitter,} from 'react-native';
 import NetworkManager from "./src/netwok/NetworkManager";
 import QueryPost from "./src/netwok/query/QueryPost";
 import MapView from "./src/view/MapView";
+import CollapsingToldBar from "./src/view/CollapsingToldBar";
 var AndroidButton = requireNativeComponent('RCTButton');
 
 const HEADER_EXPANDED_HEIGHT = 300;
 const HEADER_COLLAPSED_HEIGHT = 60;
+const image = require('../graphQl/src/res/piza.png');
 
 
 export default class App extends Component<Props> {
+
+    toldBar: CollapsingToldBar;
 
     constructor(props) {
         super(props);
@@ -29,7 +33,6 @@ export default class App extends Component<Props> {
             spinnerAnim: new Animated.Value(0),
             springAnim: new Animated.Value(0),
             springMovingMargin: new Animated.Value(0),
-            scrollY: new Animated.Value(0)
 
         };
         this.buttonClick = false;
@@ -174,51 +177,23 @@ export default class App extends Component<Props> {
     }
 
     render() {
-        const { width: SCREEN_WIDTH } = Dimensions.get('screen');
-
-        const headerHeight = this.state.scrollY.interpolate({
-            inputRange: [0, HEADER_EXPANDED_HEIGHT-HEADER_COLLAPSED_HEIGHT],
-            outputRange: [HEADER_EXPANDED_HEIGHT, HEADER_COLLAPSED_HEIGHT],
-            extrapolate: 'clamp'
-        });
 
         return (
-            <View style={styles.container}>
-                <View style={{
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    zIndex: 3,
-                    backgroundColor: '#65499c',
-                    height: HEADER_COLLAPSED_HEIGHT,
-                    width: '100%'
-                }}/>
-                <Animated.View style={{
-                    height: headerHeight, backgroundColor: '#65499c',
-                    width: SCREEN_WIDTH, position: 'absolute', top: 0, left: 0, zIndex: 1
-                }}/>
 
-                <FlatList
-                    contentContainerStyle={{padding: 16, paddingTop: HEADER_EXPANDED_HEIGHT}}
-                    ListFooterComponent={this._animatedView() }
-                    style={{width: '100%', height: '100%', zIndex: 1, position: 'absolute'}}
-                    keyExtractor={(item, index) => item.id}
-                    data={this.state.allPosts}
-                    scrollEventThrottle={16}
-                    onScroll={Animated.event([{
-                        nativeEvent: {
-                            contentOffset: {y: this.state.scrollY}
-                        }
-                    }])
-                    }
-                    renderItem={(item) =>
+            <CollapsingToldBar
+                ref={(toldBar) => this.toldBar = toldBar}
+                data={this.state.allPosts}
+                listFooterComponent={this._animatedView()}
+                renderItem={(item) => {
+                    return(
                         <Text style={{padding: 10,}}>
                             {item.item.title}
                         </Text>
-                    }
-                />
+                    )
+                }}
+            />
 
-            </View>
+
         );
     }
 
