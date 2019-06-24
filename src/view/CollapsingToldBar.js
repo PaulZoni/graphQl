@@ -103,16 +103,32 @@ export default class CollapsingToldBar extends React.Component {
                         {'headerTitle'}
                     </Animated.Text>
 
-                    <Animated.Image source={gear}
-                                    style={{
-                                        transform:[{rotate: this.spinner}],
-                                        position: 'absolute',
-                                        bottom: -30,
-                                        right: 10,
-                                        width: 60,
-                                        height: 60,
-                                    }}
-                    />
+                    <View style={{
+                        shadowColor: "#000",
+                        shadowOffset: {
+                            width: 0,
+                            height: 12,
+                        },
+                        shadowOpacity: 0.58,
+                        shadowRadius: 16.00,
+                        elevation: 24,
+                        position: 'absolute',
+                        bottom: -30,
+                        right: 10,
+                        width: 60,
+                        height: 60,
+                        zIndex: 3
+                    }}>
+                        <Animated.Image
+                            source={gear}
+                            style={{
+                                transform:[{rotate: this.spinner}],
+                                width: 60,
+                                height: 60,
+                            }}
+                        />
+                    </View>
+
                 </Animated.View>
 
                 <FlatList
