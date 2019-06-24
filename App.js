@@ -6,19 +6,15 @@
  * @flow
  */
 
-import React, {Component, PureComponent} from 'react';
-import {StyleSheet, Text, View, FlatList, NativeModules,
-    Platform, DeviceEventEmitter, Animated, TouchableOpacity, Easing, Dimensions,ImageBackground,
+import React, {Component} from 'react';
+import {StyleSheet, Text, View, NativeModules,
+    Platform, DeviceEventEmitter, Animated, TouchableOpacity, Easing,
     requireNativeComponent, NativeEventEmitter,} from 'react-native';
 import NetworkManager from "./src/netwok/NetworkManager";
 import QueryPost from "./src/netwok/query/QueryPost";
 import MapView from "./src/view/MapView";
 import CollapsingToldBar from "./src/view/CollapsingToldBar";
 var AndroidButton = requireNativeComponent('RCTButton');
-
-const HEADER_EXPANDED_HEIGHT = 300;
-const HEADER_COLLAPSED_HEIGHT = 60;
-const image = require('../graphQl/src/res/piza.png');
 
 
 export default class App extends Component<Props> {
@@ -230,11 +226,4 @@ export default class App extends Component<Props> {
 
 }
 
-const styles = StyleSheet.create({
-
-    container: {
-        flex: 1,
-        backgroundColor: '#F5FCFF',
-    },
-
-});
+const styles = StyleSheet.create({});

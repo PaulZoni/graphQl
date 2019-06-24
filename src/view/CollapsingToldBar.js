@@ -1,7 +1,5 @@
-import React, {Component, PureComponent} from 'react';
-import {StyleSheet, Text, View, FlatList, NativeModules,
-    Platform, DeviceEventEmitter, Animated, TouchableOpacity, Easing, Dimensions,ImageBackground,
-    requireNativeComponent, NativeEventEmitter,} from 'react-native';
+import React from 'react';
+import {StyleSheet, View, FlatList, Animated, Dimensions,ImageBackground,} from 'react-native';
 import PropTypes from 'prop-types';
 
 
